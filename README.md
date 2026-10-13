@@ -1,11 +1,36 @@
 # Faculty Workload & Timetable Management System
 
-## Run
-1. Extract this folder.
-2. Copy your existing `faculty_timetable.db` into this folder if you want to keep your current records.
-3. In terminal run `python -m pip install -r requirements.txt`
-4. Run `python app.py`
-5. Open http://127.0.0.1:5000
+A web-based application designed to manage faculty workloads, courses, classrooms, and academic timetables efficiently.
 
-## New feature
-The Assignments page connects existing faculty and courses. Newly created assignments become available in the Timetable planner. Existing database records are preserved when you use your database file.
+## 🌐 Live Demo
+
+🚀 **[Click here to access the live application](https://faculty-timetable-system-u07i.onrender.com)**
+
+> Note: The free hosting service may take some time to wake up after inactivity.
+
+## ✨ Features
+
+- Faculty management
+- Course management
+- Classroom and room management
+- Faculty-course assignments
+- Timetable scheduling
+- Faculty workload limit validation
+- Room and faculty conflict detection
+- Faculty substitution management
+- Dashboard displaying workload and timetable statistics
+
+## 🛠️ Technologies Used
+
+- **Backend:** Python, Flask
+- **Database:** SQLite
+- **Frontend:** HTML, CSS
+- **Deployment:** Render
+- **Version Control:** Git and GitHub
+
+## 💻 Run Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Nakshatravijayvargi/DBMS-project.git
