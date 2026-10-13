@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% set heading="Faculty directory" %}
+{% block content %}
+<div class="page-intro"><div><h2>Faculty members</h2><p>Maintain faculty profiles and keep weekly teaching loads visible.</p></div><span class="tag">{{ rows|length }} members</span></div>
+<div class="content-grid">
+<form class="panel form-panel" method="post"><h3>Add faculty</h3><p class="muted">Create a faculty record in the database.</p>
+<label>Full name<input name="name" required placeholder="e.g. Dr. Aditi Rao"></label><label>Department<input name="department" required placeholder="e.g. Computer Science"></label><label>Email address<input name="email" type="email" placeholder="name@university.edu"></label><label>Weekly hour limit<input name="max_hours" type="number" min="1" max="40" value="16" required></label><button class="button" type="submit">＋ Add faculty member</button></form>
+<div class="panel"><div class="panel-head"><div><h3>Faculty overview</h3><p>Teaching capacity and assignments</p></div></div><div class="table-wrap"><table><thead><tr><th>FACULTY</th><th>DEPARTMENT</th><th>WORKLOAD</th></tr></thead><tbody>{% for r in rows %}<tr><td><b>{{ r.name }}</b><small class="subline">{{ r.email or 'Email not added' }}</small></td><td>{{ r.department }}</td><td><b>{{ r.assigned }} / {{ r.max_hours }} hrs</b><div class="progress mini"><i style="width:{{ [100,(r.assigned*100/r.max_hours)|int]|min }}%"></i></div></td></tr>{% endfor %}</tbody></table></div></div>
+</div>{% endblock %}

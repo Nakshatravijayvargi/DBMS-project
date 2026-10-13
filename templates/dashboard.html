@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% set heading="Faculty Workload & Timetable" %}
+{% block content %}
+<section class="welcome"><div><div class="eyebrow light">ACADEMIC PLANNING, SIMPLIFIED</div><h2>Good afternoon, Admin <span>✦</span></h2><p>One place to coordinate faculty, courses, rooms and class schedules.</p></div><a class="button button-light" href="{{ url_for('timetable') }}">＋ Create timetable</a></section>
+<section class="stats">
+  <div class="stat-card"><div class="stat-top"><span>Faculty members</span><span class="stat-icon purple">♙</span></div><strong>{{ stats.faculty }}</strong><small>Across departments</small></div>
+  <div class="stat-card"><div class="stat-top"><span>Active courses</span><span class="stat-icon blue">▤</span></div><strong>{{ stats.courses }}</strong><small>Registered subjects</small></div>
+  <div class="stat-card"><div class="stat-top"><span>Available rooms</span><span class="stat-icon orange">⌂</span></div><strong>{{ stats.rooms }}</strong><small>Teaching spaces</small></div>
+  <div class="stat-card"><div class="stat-top"><span>Scheduled classes</span><span class="stat-icon green">▦</span></div><strong>{{ stats.classes }}</strong><small>Current timetable entries</small></div>
+</section>
+<section class="grid-two">
+  <div class="panel"><div class="panel-head"><div><h3>Upcoming schedule</h3><p>Quick view of scheduled sessions</p></div><a href="{{ url_for('timetable') }}">View timetable ↗</a></div>
+    <div class="table-wrap"><table><thead><tr><th>CLASS</th><th>FACULTY</th><th>DAY / TIME</th><th>ROOM</th></tr></thead><tbody>
+    {% for row in schedule %}<tr><td><b>{{ row.code }}</b><small class="subline">{{ row.title }} · {{ row.section }}</small></td><td>{{ row.faculty }}</td><td><b>{{ row.day }}</b><small class="subline">{{ row.start_time }}–{{ row.end_time }}</small></td><td><span class="tag">{{ row.room_no }}</span></td></tr>{% endfor %}
+    </tbody></table></div>
+  </div>
+  <div class="panel"><div class="panel-head"><div><h3>Faculty workload</h3><p>Assigned hours vs weekly limit</p></div><a href="{{ url_for('faculty') }}">Manage ↗</a></div>
+  {% for person in workload %}<div class="workload"><div class="workload-line"><div><b>{{ person.name }}</b><small>{{ person.department }}</small></div><span>{{ person.assigned }} / {{ person.max_hours }} hrs</span></div><div class="progress"><i style="width:{{ [100, (person.assigned * 100 / person.max_hours)|int]|min }}%"></i></div></div>{% endfor %}
+  <div class="note-box"><span>✦</span><div><b>Scheduling tip</b><p>Check workload limits and room conflicts before publishing the final timetable.</p></div></div>
+  </div>
+</section>
+{% endblock %}

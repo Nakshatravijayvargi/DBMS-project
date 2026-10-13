@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% set heading="Faculty-course assignments" %}
+{% block content %}
+<div class="page-intro"><div><h2>Assignment management</h2><p>Link faculty members to courses and sections before scheduling classes.</p></div><span class="tag">{{ rows|length }} assignments</span></div>
+<div class="content-grid">
+<form class="panel form-panel" method="post"><h3>Create assignment</h3><p class="muted">The saved assignment will appear in the timetable planner.</p>
+<label>Faculty member<select name="faculty_id" required>{% for f in staff %}<option value="{{ f.id }}">{{ f.name }} · {{ f.department }} (max {{ f.max_hours }} hrs)</option>{% endfor %}</select></label>
+<label>Course<select name="course_id" required>{% for c in courses %}<option value="{{ c.id }}">{{ c.code }} · {{ c.title }}</option>{% endfor %}</select></label>
+<label>Section<input name="section" required placeholder="e.g. CSE-A" value="CSE-A"></label>
+<label>Weekly hours<input name="weekly_hours" type="number" min="1" max="20" value="3" required></label>
+<button class="button" type="submit">＋ Save assignment</button>
+<div class="note-box"><span>✦</span><div><b>Workload check</b><p>The app checks the faculty member's weekly hour limit before saving.</p></div></div>
+</form>
+<div class="panel"><div class="panel-head"><div><h3>Existing assignments</h3><p>Faculty, course and section relationships</p></div></div><div class="table-wrap"><table><thead><tr><th>FACULTY</th><th>COURSE</th><th>SECTION</th><th>HOURS / WEEK</th></tr></thead><tbody>{% for r in rows %}<tr><td><b>{{ r.faculty }}</b><small class="subline">{{ r.department }}</small></td><td><b>{{ r.code }}</b><small class="subline">{{ r.title }}</small></td><td><span class="tag">{{ r.section }}</span></td><td>{{ r.weekly_hours }}</td></tr>{% else %}<tr><td colspan="4">No assignments yet.</td></tr>{% endfor %}</tbody></table></div></div>
+</div>{% endblock %}
